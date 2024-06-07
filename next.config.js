@@ -15,10 +15,10 @@ module.exports = {
                 protocol: "http",
                 hostname: "**", // Match all HTTP resources
             },
-            {
-                protocol: "https",
-                hostname: "", // will be updated after my API deploying...
-            },
+            // {
+            //     protocol: "https",
+            //     hostname: "", // will be updated after my API deploying...
+            // },
         ],
     },
 };
