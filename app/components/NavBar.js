@@ -10,7 +10,7 @@ export default function NavBar() {
                     <summary className="btn btn-ghost lg:hidden">
                         <FontAwesomeIcon icon={faBars} size="xl" />
                     </summary>
-                    <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 lg:hidden">
+                    <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-green-100 rounded-box w-52 lg:hidden">
                         <li>
                             <Link href={"/"}>Home</Link>
                         </li>
