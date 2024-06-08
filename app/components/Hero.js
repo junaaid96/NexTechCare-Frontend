@@ -1,12 +1,12 @@
-
-
 export default function Hero() {
     return (
         <header className="pt-16">
-            <div className="hero p-20 bg-banner">
+            <div className="hero lg:p-20 bg-banner max-sm:text-sm">
                 <div className="hero-content text-center">
                     <div className="max-w-sm lg:max-w-full">
-                        <h1 className="text-5xl font-bold">NexTechCare</h1>
+                        <h1 className="text-5xl font-bold max-sm:text-3xl">
+                            NexTechCare
+                        </h1>
                         <p className="m-6">
                             NexTechCare serves as a central hub for users
                             seeking assistance with technical issues related to
