@@ -15,19 +15,19 @@ export default function NavBar() {
                             <Link href={"/"}>Home</Link>
                         </li>
                         <li>
-                            <Link href={"#services"}>Services</Link>
+                            <Link href={"/#services"}>Services</Link>
                         </li>
                         <li>
-                            <Link href={"#features"}>Features</Link>
+                            <Link href={"/#features"}>Features</Link>
                         </li>
                         <li>
-                            <Link href={"#plans"}>Plans</Link>
+                            <Link href={"/#plans"}>Plans</Link>
                         </li>
                         <li>
-                            <Link href={"#about"}>About</Link>
+                            <Link href={"/#about"}>About</Link>
                         </li>
                         <li>
-                            <Link href={"#contact"}>Contact</Link>
+                            <Link href={"/#contact"}>Contact</Link>
                         </li>
                         {/* <hr />
                         <li className="rounded-lg shadow">
@@ -53,19 +53,19 @@ export default function NavBar() {
                         <Link href={"/"}>Home</Link>
                     </li>
                     <li>
-                        <Link href={"#services"}>Services</Link>
+                        <Link href={"/#services"}>Services</Link>
                     </li>
                     <li>
-                        <Link href={"#features"}>Features</Link>
+                        <Link href={"/#features"}>Features</Link>
                     </li>
                     <li>
-                        <Link href={"#plans"}>Plans</Link>
+                        <Link href={"/#plans"}>Plans</Link>
                     </li>
                     <li>
-                        <Link href={"#about"}>About</Link>
+                        <Link href={"/#about"}>About</Link>
                     </li>
                     <li>
-                        <Link href={"#contact"}>Contact</Link>
+                        <Link href={"/#contact"}>Contact</Link>
                     </li>
                 </ul>
             </div>

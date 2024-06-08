@@ -1,5 +1,3 @@
-
-
 export default function Plans() {
     return (
         <section id="plans" className="bg-white py-16">
@@ -31,7 +29,7 @@ export default function Plans() {
                                     </div>
                                     <div className="mt-8">
                                         <button className="btn btn-primary">
-                                            Get Started
+                                            Purchase
                                         </button>
                                     </div>
                                 </div>
@@ -59,7 +57,7 @@ export default function Plans() {
                                     </div>
                                     <div className="mt-8">
                                         <button className="btn btn-primary">
-                                            Get Started
+                                            Purchase
                                         </button>
                                     </div>
                                 </div>
@@ -88,7 +86,7 @@ export default function Plans() {
                                     </div>
                                     <div className="mt-8">
                                         <button className="btn btn-primary">
-                                            Get Started
+                                            Purchase
                                         </button>
                                     </div>
                                 </div>
