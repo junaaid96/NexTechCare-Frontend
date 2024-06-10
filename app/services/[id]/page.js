@@ -23,7 +23,6 @@ export default async function ServiceDetails({ params }) {
                             <span className="font-semibold">Description:</span>{" "}
                             {service.description}
                         </p>
-                        <p>Total Customer: {service.customer.length}</p>
                     </div>
                     <div className="md:w-1/3 flex flex-col items-start md:items-end">
                         <p className="text-xl text-gray-800 mb-4">

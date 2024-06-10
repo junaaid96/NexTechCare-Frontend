@@ -9,6 +9,7 @@ export default function TakeButton({ serviceId }) {
     const userContext = useUser();
     const { userType } = userContext;
     const [isTaken, setIsTaken] = useState(false);
+    const [totalCustomer, setTotalCustomer] = useState(0);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
@@ -17,6 +18,7 @@ export default function TakeButton({ serviceId }) {
             try {
                 const service = await getService({ id: serviceId });
                 const customers = service.customer;
+                setTotalCustomer(customers.length);
                 const customerIDs = customers.map(
                     (customer) => customer.user.id
                 );
@@ -31,7 +33,7 @@ export default function TakeButton({ serviceId }) {
             }
         }
         checkTaken();
-    }, [serviceId, isTaken]);
+    }, [serviceId, isTaken, totalCustomer]);
 
     async function handleTakeService() {
         try {
@@ -63,19 +65,21 @@ export default function TakeButton({ serviceId }) {
                 <>
                     {isTaken ? (
                         <button
-                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md"
+                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-10"
                             disabled
                         >
                             Taken
                         </button>
                     ) : (
                         <button
-                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md"
+                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-10"
                             onClick={handleTakeService}
                         >
                             Take
                         </button>
                     )}
+                   
+                    <p className="mt-6 italic">Total Customer: {totalCustomer}</p>
                 </>
             )}
             {error && (

@@ -68,12 +68,27 @@ export default function NavBar() {
                                     <a>Profile</a>
                                     <ul className="p-2 bg-green-50 rounded-lg shadow text-center">
                                         <li>
-                                            {loading
-                                                ? "Loading..."
-                                                : user.user.username}
+                                            {loading ? (
+                                                "Loading..."
+                                            ) : (
+                                                <Link
+                                                    href={
+                                                        user.user.user_type ===
+                                                            "E"
+                                                            ? "/profiles/engineer"
+                                                            : user.user
+                                                                .user_type ===
+                                                                "C"
+                                                                ? "/profiles/customer"
+                                                                : "/profiles/admin"
+                                                    }
+                                                >
+                                                    {user.user.username} <div className="badge badge-outline">{user.user.user_type === "E" ? "Engineer" : user.user.user_type === "C" ? "Customer" : "Admin"}</div>
+                                                </Link>
+                                            )}
                                         </li>
                                         <button
-                                            className="btn btn-sm mt-3"
+                                            className="btn btn-sm mt-3 w-full"
                                             onClick={handleLogout}
                                         >
                                             Logout
@@ -113,12 +128,37 @@ export default function NavBar() {
             <div className="navbar-end">
                 {loggedIn ? (
                     <details className="dropdown dropdown-bottom dropdown-end hidden lg:block">
-                        <summary className="m-1 btn btn-outline">
-                            Profile
+                        <summary className="avatar mt-1">
+                        <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <Image
+                        src="/avatar.png"
+                        alt="user photo"
+                        width={150}
+                        height={150}
+                        className="rounded-full object-cover mb-4"
+                    />
+  </div>
                         </summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-green-50 rounded-box w-52 text-center">
                             <li>
-                                {loading ? "Loading..." : user.user.username}
+                            {loading ? (
+                                                "Loading..."
+                                            ) : (
+                                                <Link
+                                                    href={
+                                                        user.user.user_type ===
+                                                            "E"
+                                                            ? "/profiles/engineer"
+                                                            : user.user
+                                                                .user_type ===
+                                                                "C"
+                                                                ? "/profiles/customer"
+                                                                : "/profiles/admin"
+                                                    }
+                                                >
+                                                    {user.user.username} <div className="badge badge-outline">{user.user.user_type === "E" ? "Engineer" : user.user.user_type === "C" ? "Customer" : "Admin"}</div>
+                                                </Link>
+                                            )}
                             </li>
 
                             <button

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
     return (
         <header className="pt-16">
@@ -15,9 +17,9 @@ export default function Hero() {
                             general information, an effective IT support system
                             aims to provide timely and accurate solutions.
                         </p>
-                        <a href="register.html" className="btn btn-primary">
+                        <Link href="/login" className="btn btn-primary">
                             Get Started
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
