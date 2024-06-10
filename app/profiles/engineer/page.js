@@ -4,12 +4,19 @@ import { useUser } from "@/app/layout";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import {
+    filterApprovedServicesByEngineer,
+    filterPendingServicesByEngineer,
+} from "@/lib/filterServicesByEngineer";
+import { ServiceList } from "@/app/components/ServiceCard";
 
 export default function EngineerProfile() {
     const router = useRouter();
     const userContext = useUser();
     const { user, loading, loggedIn } = userContext;
+    const [myApprovedServices, setMyApprovedServices] = useState([]);
+    const [myPendingServices, setMyPendingServices] = useState([]);
+    const [servicesLoading, setServicesLoading] = useState(true);
 
     useEffect(() => {
         document.title = "NexTechCare - Engineer Profile";
@@ -24,7 +31,20 @@ export default function EngineerProfile() {
         if (!loggedIn) {
             router.push("/login");
         }
-    }, [loggedIn, router, user]);
+
+        if (user && user.user) {
+            filterApprovedServicesByEngineer(user.user.username).then(
+                (data) => {
+                    setMyApprovedServices(data);
+                    setServicesLoading(false);
+                }
+            );
+            filterPendingServicesByEngineer(user.user.username).then((data) => {
+                setMyPendingServices(data);
+                setServicesLoading(false);
+            });
+        }
+    }, [loggedIn, router, user, myApprovedServices, myPendingServices]);
 
     return loading ? (
         <div className="min-h-screen pt-20 flex flex-col items-center">
@@ -72,6 +92,23 @@ export default function EngineerProfile() {
                         </p>
                     </div>
                 </div>
+            </div>
+            <div>
+                <h3 className="text-2xl font-semibold text-center mb-6 mt-10">
+                    All Created Services
+                </h3>
+                <ServiceList
+                    title="Approved Services"
+                    services={myApprovedServices}
+                    loading={loading}
+                    servicesLoading={servicesLoading}
+                />
+                <ServiceList
+                    title="Pending Services"
+                    services={myPendingServices}
+                    loading={loading}
+                    servicesLoading={servicesLoading}
+                />
             </div>
         </div>
     );
