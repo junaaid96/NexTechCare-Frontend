@@ -1,8 +1,20 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faDesktop,
+    faHeadset,
+    faHouseLaptop,
+    faServer,
+    faShieldHalved,
+    faWrench,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Features() {
     return (
-        <section id="features" className="bg-gray-100 py-16">
-            <div className="max-w-7xl mx-auto text-center">
+        <section
+            id="features"
+            className="bg-gradient-to-t from-green-50 to-white py-16"
+        >
+            <div className="max-w-7xl mx-auto text-center ">
                 <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
                     Features
                 </h2>
@@ -11,10 +23,10 @@ export default function Features() {
                     stand out.
                 </p>
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 m-6">
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                         <div className="p-6">
                             <div className="flex-shrink-0">
-                                <i className="fa-solid fa-headset text-4xl"></i>
+                                <FontAwesomeIcon icon={faHeadset} size="3x" />
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-gray-900">
@@ -28,10 +40,10 @@ export default function Features() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                         <div className="p-6">
                             <div className="flex-shrink-0">
-                                <i className="fa-solid fa-house-laptop text-4xl"></i>
+                                <FontAwesomeIcon icon={faDesktop} size="3x" />
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-gray-900">
@@ -45,10 +57,13 @@ export default function Features() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                         <div className="p-6">
                             <div className="flex-shrink-0">
-                                <i className="fa-solid fa-desktop text-4xl"></i>
+                                <FontAwesomeIcon
+                                    icon={faShieldHalved}
+                                    size="3x"
+                                />
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-gray-900">
@@ -63,10 +78,13 @@ export default function Features() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                         <div className="p-6">
                             <div className="flex-shrink-0">
-                                <i className="fa-solid fa-shield-halved text-4xl"></i>
+                                <FontAwesomeIcon
+                                    icon={faHouseLaptop}
+                                    size="3x"
+                                />
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-gray-900">
@@ -81,10 +99,10 @@ export default function Features() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                         <div className="p-6">
                             <div className="flex-shrink-0">
-                                <i className="fa-solid fa-server text-4xl"></i>
+                                <FontAwesomeIcon icon={faServer} size="3x" />
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-gray-900">
@@ -99,10 +117,10 @@ export default function Features() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                         <div className="p-6">
                             <div className="flex-shrink-0">
-                                <i className="fa-solid fa-wrench text-4xl"></i>
+                                <FontAwesomeIcon icon={faWrench} size="3x" />
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-gray-900">

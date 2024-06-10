@@ -7,44 +7,47 @@ import {
 
 export default function Contact() {
     return (
-        <section id="contact" className="py-10 bg-base-100 my-10">
+        <section
+            id="contact"
+            className="py-10 bg-gradient-to-b from-green-50 to-white"
+        >
             <div className="container mx-auto px-4">
                 <h2 className="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl mb-10">
                     Contact Us
                 </h2>
                 <div className="flex flex-wrap items-center justify-start gap-8 my-12 bg-green-100 rounded-xl p-6 shadow lg:w-2/3 m-auto">
-                            <div className="flex items-center justify-center gap-6">
-                                <FontAwesomeIcon icon={faBuilding} size="2x" />
-                                <div>
-                                    <h4 className="text-2xl font-semibold text-gray-700">
-                                        Office
-                                    </h4>
-                                    <p className="text-gray-500">
-                                        123 NexTechCare St, Tech City, TX 75001
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center gap-6">
-                                <FontAwesomeIcon icon={faPhone} size="2x" />
-                                <div>
-                                    <h4 className="text-2xl font-semibold text-gray-700">
-                                        Phone
-                                    </h4>
-                                    <p className="text-gray-500">+1 (555) 123-4567</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center gap-6">
-                                <FontAwesomeIcon icon={faEnvelope} size="2x" />
-                                <div>
-                                    <h4 className="text-2xl font-semibold text-gray-700">
-                                        Email
-                                    </h4>
-                                    <p className="text-gray-500">
-                                        contact@nextechcare.com
-                                    </p>
-                                </div>
-                            </div>
+                    <div className="flex items-center justify-center gap-6">
+                        <FontAwesomeIcon icon={faBuilding} size="2x" />
+                        <div>
+                            <h4 className="text-2xl font-semibold text-gray-700">
+                                Office
+                            </h4>
+                            <p className="text-gray-500">
+                                123 NexTechCare St, Tech City, TX 75001
+                            </p>
                         </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-6">
+                        <FontAwesomeIcon icon={faPhone} size="2x" />
+                        <div>
+                            <h4 className="text-2xl font-semibold text-gray-700">
+                                Phone
+                            </h4>
+                            <p className="text-gray-500">+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-6">
+                        <FontAwesomeIcon icon={faEnvelope} size="2x" />
+                        <div>
+                            <h4 className="text-2xl font-semibold text-gray-700">
+                                Email
+                            </h4>
+                            <p className="text-gray-500">
+                                contact@nextechcare.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <div className="flex flex-wrap items-center justify-center">
                     <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
                         <iframe
@@ -57,7 +60,7 @@ export default function Contact() {
                             tabIndex="0"
                         ></iframe>
                     </div>
-                    <div className="bg-gray-100 p-6 rounded-lg shadow-lg">                       
+                    <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
                         <form className="space-y-6">
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 <div className="form-control">
@@ -74,7 +77,9 @@ export default function Contact() {
 
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Email</span>
+                                        <span className="label-text">
+                                            Email
+                                        </span>
                                     </label>
                                     <input
                                         type="email"
@@ -109,7 +114,10 @@ export default function Contact() {
                             </div>
 
                             <div className="form-control">
-                                <button type="submit" className="btn btn-primary w-full sm:w-auto rounded-2xl">
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary w-full sm:w-auto rounded-2xl"
+                                >
                                     Send Message
                                 </button>
                             </div>

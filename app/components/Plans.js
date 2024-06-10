@@ -1,6 +1,6 @@
 export default function Plans() {
     return (
-        <section id="plans" className="bg-white py-16">
+        <section id="plans" className="bg-gradient-to-b from-green-50 to-white py-16">
             <div className="max-w-7xl mx-auto text-center">
                 <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
                     <span className="block">Pricing Plans</span>
@@ -12,7 +12,7 @@ export default function Plans() {
                     <div className="pt-6">
                         <div className="flow-root bg-gray-50 rounded-lg px-4 pb-8">
                             <div className="-mt-6">
-                                <div className="text-center">
+                                <div className="text-center transform transition duration-500 hover:scale-105">
                                     <h3 className="mt-2 text-lg font-medium text-gray-900 border border-primary rounded-box inline-block p-2 shadow">
                                         Basic
                                     </h3>
@@ -40,7 +40,7 @@ export default function Plans() {
                     <div className="pt-6">
                         <div className="flow-root bg-green-200 rounded-lg px-4 pb-8">
                             <div className="-mt-6">
-                                <div className="text-center">
+                                <div className="text-center transform transition duration-500 hover:scale-105">
                                     <h3 className="mt-2 text-lg font-medium text-gray-900 border border-primary rounded-box inline-block p-2 shadow">
                                         Standard
                                     </h3>
@@ -68,7 +68,7 @@ export default function Plans() {
                     <div className="pt-6">
                         <div className="flow-root bg-gray-50 rounded-lg px-4 pb-8">
                             <div className="-mt-6">
-                                <div className="text-center">
+                                <div className="text-center transform transition duration-500 hover:scale-105">
                                     <h3 className="mt-2 text-lg font-medium text-gray-900 border border-primary rounded-box inline-block p-2 shadow">
                                         Premium
                                     </h3>
