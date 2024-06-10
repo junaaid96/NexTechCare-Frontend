@@ -11,7 +11,8 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 export default function Login() {
     const router = useRouter();
     const userContext = useUser();
-    const { loading, loggedIn, setLoggedIn, userType, setUserType } = userContext;
+    const { loading, loggedIn, setLoggedIn, userType, setUserType } =
+        userContext;
     const [loginLoading, setLoginLoading] = useState(false);
     const [error, setError] = useState("");
 
