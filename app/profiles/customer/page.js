@@ -88,7 +88,7 @@ export default function CustomerProfile() {
                         <span className="loading loading-infinity loading-lg"></span>
                     </div>
                 ) : myServices.length === 0 ? (
-                    <p>No services found.</p>
+                    <p className="text-center">No services found.</p>
                 ) : (
                     <div className="flex flex-wrap gap-6 items-center justify-center pb-10">
                         {myServices.map((service) => (
