@@ -37,6 +37,9 @@ export default function Register() {
     }, [loggedIn, userType, router]);
 
     async function handleRegister(e) {
+        // Scroll to the top of the page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
         setRegisterLoading(true);
         e.preventDefault();
         const form = e.target;
