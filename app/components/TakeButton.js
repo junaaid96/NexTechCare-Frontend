@@ -1,39 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useUser } from "@/app/layout";
-import getService from "@/lib/getService";
 
-export default function TakeButton({ serviceId }) {
+export default function TakeButton({
+    serviceId,
+    isTaken,
+    setIsTaken,
+    totalCustomer,
+}) {
     const userContext = useUser();
     const { userType } = userContext;
-    const [isTaken, setIsTaken] = useState(false);
-    const [totalCustomer, setTotalCustomer] = useState(0);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
-
-    useEffect(() => {
-        async function checkTaken() {
-            try {
-                const service = await getService({ id: serviceId });
-                const customers = service.customer;
-                setTotalCustomer(customers.length);
-                const customerIDs = customers.map(
-                    (customer) => customer.user.id
-                );
-                const user_id = localStorage.getItem("user_id");
-                if (customerIDs.includes(parseInt(user_id))) {
-                    setIsTaken(true);
-                } else {
-                    setIsTaken(false);
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        checkTaken();
-    }, [serviceId, isTaken, totalCustomer]);
 
     async function handleTakeService() {
         try {
@@ -62,25 +42,26 @@ export default function TakeButton({ serviceId }) {
     return (
         <>
             {userType === "C" && (
-                <>
+                <div className="flex flex-col items-center bg-white rounded-lg lg:w-2/3 lg:m-auto shadow p-6">
+                    <p className="font-semibold">
+                        Total Customer: {totalCustomer}
+                    </p>
                     {isTaken ? (
                         <button
-                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-10"
+                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-3 w-52"
                             disabled
                         >
                             Taken
                         </button>
                     ) : (
                         <button
-                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-10"
+                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-3 w-52"
                             onClick={handleTakeService}
                         >
-                            Take
+                            Take this service
                         </button>
                     )}
-                   
-                    <p className="mt-6 italic">Total Customer: {totalCustomer}</p>
-                </>
+                </div>
             )}
             {error && (
                 <div className="toast">

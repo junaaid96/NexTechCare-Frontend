@@ -1,6 +1,11 @@
 import getAllServices from "@/lib/getAllServices";
 import Link from "next/link";
 
+export const metadata = {
+    title: "NexTechCare - All Services",
+    description: "NexTechCare - A seamless IT support experience",
+};
+
 export default async function Services() {
     const services = await getAllServices();
     return (
