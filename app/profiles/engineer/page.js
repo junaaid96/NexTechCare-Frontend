@@ -70,9 +70,9 @@ export default function EngineerProfile() {
                     <p className="text-lg text-gray-600 mb-2">
                         {user.user.email}
                     </p>
-                    <div className="text-center mt-4">
+                    <div className="text-start mt-4">
                         <p className="text-lg font-semibold text-gray-700 mb-1">
-                            {user.user.first_name} {user.user.last_name}
+                            Name: {user.user.first_name} {user.user.last_name}
                         </p>
                         <p className="text-md text-gray-600 mb-1">
                             <span className="font-semibold">Phone:</span>{" "}
