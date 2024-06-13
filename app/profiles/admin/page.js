@@ -271,13 +271,17 @@ export default function AdminProfile() {
                                         <p className="font-medium text-gray-800">
                                             Name: {service.name}
                                         </p>
-                                        <p className="text-gray-600">
+                                        <p className="font-medium text-gray-600 text-sm">
+                                            Engineer: {service.engineer.user.first_name}{" "}
+                                            {service.engineer.user.last_name}
+                                        </p>
+                                        <p className="text-gray-600 text-sm">
                                             Description: {service.description}
                                         </p>
-                                        <p className="text-gray-600">
+                                        <p className="text-gray-600 text-sm">
                                             Price: ${service.price}
                                         </p>
-                                        <p className="text-gray-600">
+                                        <p className="text-gray-600 text-sm">
                                             Duration: {service.duration}{" "}
                                             {service.duration > 1
                                                 ? "hours"
@@ -285,7 +289,7 @@ export default function AdminProfile() {
                                         </p>
                                     </div>
                                     <button
-                                        className="btn btn-primary"
+                                        className="btn btn-primary btn-sm"
                                         onClick={() =>
                                             handleApprove(service.id)
                                         }
