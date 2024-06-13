@@ -31,7 +31,7 @@ export default async function Services() {
                         </p>
                         <p className="mt-4 text-gray-600">
                             <span className="font-semibold">Duration:</span>{" "}
-                            {service.duration} Hrs
+                            {service.duration} {service.duration > 1 ? "hours" : "hour"}
                         </p>
                     </div>
                     <Link

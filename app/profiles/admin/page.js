@@ -2,9 +2,15 @@
 
 import { useUser } from "@/app/layout";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { getAllPendingServices } from "@/lib/getAllServices";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCheckCircle,
+    faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminProfile() {
     const router = useRouter();
@@ -13,7 +19,60 @@ export default function AdminProfile() {
     const [customers, setCustomers] = useState([]);
     const [engineers, setEngineers] = useState([]);
     const [activities, setActivities] = useState([]);
+    const [allPdServices, setAllPdServices] = useState([]);
     const [error, setError] = useState("");
+    const [approvedLoading, setApprovedLoading] = useState(false);
+    const [approvedSuccess, setApprovedSuccess] = useState("");
+
+    const divRef = useRef(null);
+
+    function safeLocalStorage(key) {
+        if (typeof window !== "undefined") {
+            return localStorage.getItem(key);
+        }
+        return null;
+    }
+
+    const access_token = safeLocalStorage("access_token");
+
+    const fetchData = useCallback(async () => {
+        try {
+            const [activitiesRes, engineersRes, customersRes] =
+                await Promise.all([
+                    axios.get(
+                        "https://nextechcare-backend.onrender.com/activities/",
+                        {
+                            headers: {
+                                Authorization: `Bearer ${access_token}`,
+                            },
+                        }
+                    ),
+                    axios.get(
+                        "https://nextechcare-backend.onrender.com/profiles/engineers/",
+                        {
+                            headers: {
+                                Authorization: `Bearer ${access_token}`,
+                            },
+                        }
+                    ),
+                    axios.get(
+                        "https://nextechcare-backend.onrender.com/profiles/customers/",
+                        {
+                            headers: {
+                                Authorization: `Bearer ${access_token}`,
+                            },
+                        }
+                    ),
+                ]);
+
+            setActivities(activitiesRes.data);
+            setEngineers(engineersRes.data);
+            setCustomers(customersRes.data);
+        } catch (error) {
+            console.error(error);
+            setError("An error occurred while fetching data!");
+        }
+    }, [access_token]);
 
     useEffect(() => {
         document.title = "NexTechCare - Admin Profile";
@@ -29,46 +88,42 @@ export default function AdminProfile() {
             router.push("/login");
         }
 
-        function safeLocalStorage(key) {
-            if (typeof window !== "undefined") {
-                return localStorage.getItem(key);
-            }
-            return null;
+        fetchData();
+
+        getAllPendingServices().then((data) => {
+            setAllPdServices(data);
+        });
+    }, [loggedIn, router, user, fetchData]);
+
+    const handleApprove = async (id) => {
+        // Scroll to the top of the div
+        divRef.current.scrollTo({ top: 0, behavior: "smooth" });
+
+        setApprovedLoading(true);
+        try {
+            const res = await axios.post(
+                `https://nextechcare-backend.onrender.com/services/approved/${id}/`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }
+            );
+            setError("");
+            setApprovedSuccess("Service approved successfully!");
+            setApprovedLoading(false);
+            setAllPdServices((prev) =>
+                prev.filter((service) => service.id !== id)
+            );
+            fetchData();
+        } catch (error) {
+            console.error(error);
+            setApprovedSuccess("");
+            setError("An error occurred while approving service!");
+            setApprovedLoading(false);
         }
-
-        const access_token = safeLocalStorage("access_token");
-
-        const fetchUsers = async () => {
-            try {
-                const [customersRes, engineersRes] = await Promise.all([
-                    axios.get(
-                        "https://nextechcare-backend.onrender.com/profiles/customers/",
-                        {
-                            headers: {
-                                Authorization: `Bearer ${access_token}`,
-                            },
-                        }
-                    ),
-                    axios.get(
-                        "https://nextechcare-backend.onrender.com/profiles/engineers/",
-                        {
-                            headers: {
-                                Authorization: `Bearer ${access_token}`,
-                            },
-                        }
-                    ),
-                ]);
-
-                setCustomers(customersRes.data);
-                setEngineers(engineersRes.data);
-            } catch (error) {
-                console.error(error);
-                setError("An error occurred while fetching data!");
-            }
-        };
-
-        fetchUsers();
-    }, [loggedIn, router, user]);
+    };
 
     return loading ? (
         <div className="min-h-screen pt-20 flex flex-col items-center">
@@ -114,7 +169,7 @@ export default function AdminProfile() {
                 </div>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     <div className="bg-white shadow-lg rounded-lg p-6 h-96 overflow-auto">
-                        <h4 className="text-lg font-semibold text-center mb-3 border-b w-full">
+                        <h4 className="text-lg font-semibold text-center mb-3 border shadow">
                             Engineers - {engineers.length}
                         </h4>
                         <table className="table-auto w-full">
@@ -151,7 +206,7 @@ export default function AdminProfile() {
                         </table>
                     </div>
                     <div className="bg-white shadow-lg rounded-lg p-6 h-96 overflow-auto">
-                        <h4 className="text-lg font-semibold text-center mb-3 border-b w-full">
+                        <h4 className="text-lg font-semibold text-center mb-3 border shadow">
                             Customers - {customers.length}
                         </h4>
                         <table className="table-auto w-full">
@@ -187,23 +242,85 @@ export default function AdminProfile() {
                             </tbody>
                         </table>
                     </div>
-                    <div className="bg-white shadow-lg rounded-lg p-6 h-96 overflow-auto">
-                        <h4 className="text-lg font-semibold text-center mb-3 border-b w-full">
-                            Requests
+                    <div
+                        className="bg-white shadow-lg rounded-lg p-6 h-96 overflow-auto"
+                        ref={divRef}
+                    >
+                        <h4 className="text-lg font-semibold text-center mb-3 border shadow">
+                            Service Approval Requests
                         </h4>
-                        {/* requests content */}
+                        {approvedLoading && (
+                            <>
+                                <span className="loading loading-spinner text-primary loading-lg"></span>
+                                <p className="mb-6">Please wait</p>
+                            </>
+                        )}
+                        {approvedSuccess && (
+                            <div className="alert alert-success mb-6">
+                                <FontAwesomeIcon icon={faCheckCircle} />
+                                <span>{approvedSuccess}</span>
+                            </div>
+                        )}
+                        {allPdServices.map((service) => (
+                            <div
+                                key={service.id}
+                                className="mb-4 p-4 border rounded-md"
+                            >
+                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                                    <div className="flex-1">
+                                        <p className="font-medium text-gray-800">
+                                            Name: {service.name}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            Description: {service.description}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            Price: ${service.price}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            Duration: {service.duration}{" "}
+                                            {service.duration > 1
+                                                ? "hours"
+                                                : "hour"}
+                                        </p>
+                                    </div>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() =>
+                                            handleApprove(service.id)
+                                        }
+                                    >
+                                        Approve
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
+
                     <div className="bg-white shadow-lg rounded-lg p-6 h-96 overflow-auto">
-                        <h4 className="text-lg font-semibold text-center mb-3 border-b w-full">
+                        <h4 className="text-lg font-semibold text-center mb-3 border shadow">
                             Activities
                         </h4>
-                        {/* activities content */}
+                        {activities.map((activity) => (
+                            <div
+                                key={activity.id}
+                                className="p-3 flex flex-col border-b"
+                            >
+                                <p className="text-sm">{activity.name}</p>
+                                <p className="text-sm text-gray-500 text-end">
+                                    {new Date(
+                                        activity.created_at
+                                    ).toLocaleString()}
+                                </p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
             {error && (
                 <div className="fixed bottom-4 left-4 bg-red-500 text-white p-3 rounded-lg">
-                    {error}
+                    <FontAwesomeIcon icon={faTriangleExclamation} />
+                    <span>{error}</span>
                 </div>
             )}
         </div>

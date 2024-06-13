@@ -34,7 +34,7 @@ export default async function ServiceDetails({ params }) {
                         </p>
                         <p className="text-xl text-gray-800 mb-6">
                             <span className="font-semibold">Duration:</span>{" "}
-                            {service.duration} Hrs
+                            {service.duration} {service.duration > 1 ? "hours" : "hour"}
                         </p>
                     </div>
                 </div>
