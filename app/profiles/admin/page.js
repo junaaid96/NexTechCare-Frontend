@@ -117,6 +117,9 @@ export default function AdminProfile() {
                 prev.filter((service) => service.id !== id)
             );
             fetchData();
+            setTimeout(() => {
+                setApprovedSuccess("");
+            }, 3000);
         } catch (error) {
             console.error(error);
             setApprovedSuccess("");

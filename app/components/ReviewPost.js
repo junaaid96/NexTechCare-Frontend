@@ -80,6 +80,9 @@ export default function ReviewPost({ serviceId, isTaken }) {
 
             setError("");
             setSuccess("Review Submitted!");
+            setTimeout(() => {
+                setSuccess("");
+            }, 3000);
 
             // clearing data after submitted
             setReview("");

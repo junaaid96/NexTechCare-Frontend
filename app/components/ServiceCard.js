@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // ServiceCard component
-export const ServiceCard = ({ service }) => (
+export const ServiceCard = ({ service, onDelete }) => (
     <div
         key={service.id}
         className="bg-white rounded-lg shadow p-6 w-96 h-72 flex flex-col justify-evenly"
@@ -18,17 +18,25 @@ export const ServiceCard = ({ service }) => (
             <span className="font-semibold">Duration:</span> {service.duration}{" "}
             Hrs
         </p>
-        <Link
-            className="btn btn-primary btn-outline btn-sm mt-3 w-32"
-            href={`/services/${service.id}`}
-        >
-            View
-        </Link>
+        <div className="flex items-center justify-between gap-3">
+            <Link
+                className="btn btn-primary btn-outline btn-sm mt-3 w-32"
+                href={`/services/${service.id}`}
+            >
+                View
+            </Link>
+            <button
+                className="btn btn-danger btn-outline btn-sm mt-3 w-32"
+                onClick={() => onDelete(service.id)}
+            >
+                Delete
+            </button>
+        </div>
     </div>
 );
 
 // ServiceList component
-export const ServiceList = ({ title, services, loading, servicesLoading }) => (
+export const ServiceList = ({ title, services, loading, servicesLoading, onDelete }) => (
     <>
         {title && (
             <h4 className="text-lg font-semibold text-center mb-10 border shadow w-1/3 m-auto">
@@ -44,7 +52,7 @@ export const ServiceList = ({ title, services, loading, servicesLoading }) => (
         ) : (
             <div className="flex flex-wrap gap-6 items-center justify-center pb-10">
                 {services.map((service) => (
-                    <ServiceCard key={service.id} service={service} />
+                    <ServiceCard key={service.id} service={service} onDelete={onDelete} />
                 ))}
             </div>
         )}

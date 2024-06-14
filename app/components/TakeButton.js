@@ -3,6 +3,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { useUser } from "@/app/layout";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCheckCircle,
+    faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function TakeButton({
     serviceId,
@@ -32,6 +37,9 @@ export default function TakeButton({
             setError("");
             setSuccess(response.data.success);
             setIsTaken(true);
+            setTimeout(() => {
+                setSuccess("");
+            }, 3000);
         } catch (error) {
             console.error(error.response);
             setSuccess("");
@@ -66,6 +74,7 @@ export default function TakeButton({
             {error && (
                 <div className="toast">
                     <div className="alert alert-error">
+                    <FontAwesomeIcon icon={faTriangleExclamation} />
                         <span>{error}</span>
                     </div>
                 </div>
@@ -73,6 +82,7 @@ export default function TakeButton({
             {success && (
                 <div className="toast">
                     <div className="alert alert-success">
+                        <FontAwesomeIcon icon={faCheckCircle} />
                         <span>{success}</span>
                     </div>
                 </div>

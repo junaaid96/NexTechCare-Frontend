@@ -2,13 +2,19 @@
 
 import { useUser } from "@/app/layout";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import {
     filterApprovedServicesByEngineer,
     filterPendingServicesByEngineer,
 } from "@/lib/filterServicesByEngineer";
 import { ServiceList } from "@/app/components/ServiceCard";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCheckCircle,
+    faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function EngineerProfile() {
     const router = useRouter();
@@ -17,6 +23,31 @@ export default function EngineerProfile() {
     const [myApprovedServices, setMyApprovedServices] = useState([]);
     const [myPendingServices, setMyPendingServices] = useState([]);
     const [servicesLoading, setServicesLoading] = useState(true);
+    const [successDeleted, setSuccessDeleted] = useState("");
+
+    function safeLocalStorage(key) {
+        if (typeof window !== "undefined") {
+            return localStorage.getItem(key);
+        }
+        return null;
+    }
+
+    const access_token = safeLocalStorage("access_token");
+
+    const fetchData = useCallback(async () => {
+        if (user && user.user) {
+            filterApprovedServicesByEngineer(user.user.username).then(
+                (data) => {
+                    setMyApprovedServices(data);
+                    setServicesLoading(false);
+                }
+            );
+            filterPendingServicesByEngineer(user.user.username).then((data) => {
+                setMyPendingServices(data);
+                setServicesLoading(false);
+            });
+        }
+    }, [user]);
 
     useEffect(() => {
         document.title = "NexTechCare - Engineer Profile";
@@ -32,19 +63,26 @@ export default function EngineerProfile() {
             router.push("/login");
         }
 
-        if (user && user.user) {
-            filterApprovedServicesByEngineer(user.user.username).then(
-                (data) => {
-                    setMyApprovedServices(data);
-                    setServicesLoading(false);
-                }
-            );
-            filterPendingServicesByEngineer(user.user.username).then((data) => {
-                setMyPendingServices(data);
-                setServicesLoading(false);
-            });
+        fetchData();
+    }, [loggedIn, router, fetchData]);
+
+    const handleDeleteService = async (id) => {
+        const res = await axios.delete(
+            `https://nextechcare-backend.onrender.com/services/${id}/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                },
+            }
+        );
+        if (res.status === 200) {
+            fetchData();
+            setSuccessDeleted(res.data.success);
+            setTimeout(() => {
+                setSuccessDeleted("");
+            }, 3000);
         }
-    }, [loggedIn, router, user, myApprovedServices, myPendingServices]);
+    };
 
     return loading ? (
         <div className="min-h-screen pt-20 flex flex-col items-center">
@@ -97,17 +135,27 @@ export default function EngineerProfile() {
                 <h3 className="text-2xl font-semibold text-center mb-6 mt-10">
                     All Created Services
                 </h3>
+                {successDeleted && (
+                    <div className="toast toast-end">
+                        <div className="alert alert-success">
+                            <FontAwesomeIcon icon={faCheckCircle} />
+                            <span>{successDeleted}</span>
+                        </div>
+                    </div>
+                )}
                 <ServiceList
                     title="Approved Services"
                     services={myApprovedServices}
                     loading={loading}
                     servicesLoading={servicesLoading}
+                    onDelete={handleDeleteService}
                 />
                 <ServiceList
                     title="Pending Services"
                     services={myPendingServices}
                     loading={loading}
                     servicesLoading={servicesLoading}
+                    onDelete={handleDeleteService}
                 />
             </div>
         </div>
