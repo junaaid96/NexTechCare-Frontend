@@ -4,6 +4,7 @@ import { useUser } from "@/app/layout";
 import Image from "next/image";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import axios from "axios";
 import { getAllPendingServices } from "@/lib/getAllServices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -133,7 +134,7 @@ export default function AdminProfile() {
             <span className="loading loading-ring loading-lg"></span>
         </div>
     ) : (
-        <div className="min-h-screen pt-20 bg-gradient-to-t from-green-50 to-white">
+        <div className="min-h-screen pt-20 pb-10 bg-gradient-to-t from-green-50 to-white">
             <div className="p-4 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
                 <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
                     <h4 className="text-xl font-semibold text-gray-800 mb-6">
@@ -169,6 +170,9 @@ export default function AdminProfile() {
                             {user.address}
                         </p>
                     </div>
+                    <Link href="/profiles/admin/inbox">
+                        <button className="btn btn-primary ">Inbox</button>
+                    </Link>
                 </div>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     <div className="bg-white shadow-lg rounded-lg p-6 h-96 overflow-auto">
@@ -187,7 +191,7 @@ export default function AdminProfile() {
                             <tbody>
                                 {engineers.map((engineer) => (
                                     <tr
-                                        key={engineer.id}
+                                        key={engineer.user.id}
                                         className="border-t text-center"
                                     >
                                         <td className="px-4 py-2">
@@ -224,7 +228,7 @@ export default function AdminProfile() {
                             <tbody>
                                 {customers.map((customer) => (
                                     <tr
-                                        key={customer.id}
+                                        key={customer.user.id}
                                         className="border-t text-center"
                                     >
                                         <td className="px-4 py-2">
@@ -253,10 +257,10 @@ export default function AdminProfile() {
                             Service Approval Requests
                         </h4>
                         {approvedLoading && (
-                            <>
+                            <div className="flex flex-col items-center">
                                 <span className="loading loading-spinner text-primary loading-lg"></span>
-                                <p className="mb-6">Please wait</p>
-                            </>
+                                <p className="mb-12">Please wait</p>
+                            </div>
                         )}
                         {approvedSuccess && (
                             <div className="alert alert-success mb-6">
@@ -275,7 +279,8 @@ export default function AdminProfile() {
                                             Name: {service.name}
                                         </p>
                                         <p className="font-medium text-gray-600 text-sm">
-                                            Engineer: {service.engineer.user.first_name}{" "}
+                                            Engineer:{" "}
+                                            {service.engineer.user.first_name}{" "}
                                             {service.engineer.user.last_name}
                                         </p>
                                         <p className="text-gray-600 text-sm">

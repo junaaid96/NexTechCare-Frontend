@@ -15,11 +15,12 @@ import {
     faCheckCircle,
     faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function EngineerProfile() {
     const router = useRouter();
     const userContext = useUser();
-    const { user, loading, loggedIn } = userContext;
+    const { user, otherUserData, loading, loggedIn } = userContext;
     const [myApprovedServices, setMyApprovedServices] = useState([]);
     const [myPendingServices, setMyPendingServices] = useState([]);
     const [servicesLoading, setServicesLoading] = useState(true);
@@ -89,7 +90,7 @@ export default function EngineerProfile() {
             <span className="loading loading-ring loading-lg"></span>
         </div>
     ) : (
-        <div className="min-h-screen pt-20 bg-gradient-to-t from-green-50 to-white">
+        <div className="min-h-screen pt-20 pb-10 bg-gradient-to-t from-green-50 to-white">
             <div className="bg-white p-10 rounded-lg shadow w-full lg:w-1/2 lg:m-auto">
                 <div className="flex flex-col items-center">
                     <h2 className="text-4xl font-semibold text-gray-800 mb-6">
@@ -114,20 +115,33 @@ export default function EngineerProfile() {
                         </p>
                         <p className="text-md text-gray-600 mb-1">
                             <span className="font-semibold">Phone:</span>{" "}
-                            {user.phone}
+                            {otherUserData.phone}
                         </p>
                         <p className="text-md text-gray-600 mb-1">
                             <span className="font-semibold">Skills:</span>{" "}
-                            {user.skills}
+                            {otherUserData.skills}
                         </p>
                         <p className="text-md text-gray-600 mb-1">
                             <span className="font-semibold">Experience:</span>{" "}
-                            {user.experience}
+                            {otherUserData.experience}
                         </p>
                         <p className="text-md text-gray-600">
                             <span className="font-semibold">Address:</span>{" "}
-                            {user.address}
+                            {otherUserData.address}
                         </p>
+
+                        <div className="flex items-center justify-between mt-10">
+                            <Link href="/services/create">
+                                <button className="btn btn-primary btn-sm w-30">
+                                    Create Service
+                                </button>
+                            </Link>
+                            <Link href="/profiles/engineer/update">
+                                <button className="btn btn-primary btn-sm w-30">
+                                    Update Profile
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -24,6 +24,14 @@ export default function RootLayout({ children }) {
     const [loading, setLoading] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
 
+    const [otherUserData, setOtherUserData] = useState({
+        phone: "",
+        address: "",
+        occupation: "",
+        skills: "",
+        experience: "",
+    });
+
     useEffect(() => {
         document.title = "NexTechCare";
         const metaDescription = document.querySelector(
@@ -71,6 +79,19 @@ export default function RootLayout({ children }) {
                 .then((response) => {
                     console.log(response.data);
                     setUser(response.data);
+                    setOtherUserData({
+                        phone: response.data.phone,
+                        address: response.data.address,
+                        occupation: response.data.occupation
+                            ? response.data.occupation
+                            : null,
+                        skills: response.data.skills
+                            ? response.data.skills
+                            : null,
+                        experience: response.data.experience
+                            ? response.data.experience
+                            : null,
+                    });
                     // setUserType(response.data.user.user_type);
                     setLoading(false);
                 })
@@ -88,10 +109,19 @@ export default function RootLayout({ children }) {
         }, 3540000);
     }, [router]);
 
-
     return (
         <UserContext.Provider
-            value={{ user, userType, setUserType, loading, loggedIn, setLoggedIn }}
+            value={{
+                user,
+                setUser,
+                otherUserData,
+                setOtherUserData,
+                userType,
+                setUserType,
+                loading,
+                loggedIn,
+                setLoggedIn,
+            }}
         >
             <html lang="en" data-theme="emerald">
                 <body className={inter.className}>
