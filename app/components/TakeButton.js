@@ -56,14 +56,14 @@ export default function TakeButton({
                     </p>
                     {isTaken ? (
                         <button
-                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-3 w-52"
+                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-3 w-44 btn-sm"
                             disabled
                         >
                             Taken
                         </button>
                     ) : (
                         <button
-                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-3 w-52"
+                            className="py-2 px-4 btn btn-primary font-bold rounded-lg shadow-md mt-3 w-44 btn-sm"
                             onClick={handleTakeService}
                         >
                             Take this service
@@ -74,7 +74,7 @@ export default function TakeButton({
             {error && (
                 <div className="toast">
                     <div className="alert alert-error">
-                    <FontAwesomeIcon icon={faTriangleExclamation} />
+                        <FontAwesomeIcon icon={faTriangleExclamation} />
                         <span>{error}</span>
                     </div>
                 </div>

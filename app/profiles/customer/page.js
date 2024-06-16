@@ -11,7 +11,7 @@ import Link from "next/link";
 export default function CustomerProfile() {
     const router = useRouter();
     const userContext = useUser();
-    const { user, otherUserData, loading, loggedIn } = userContext;
+    const { user, userType, otherUserData, loading, loggedIn } = userContext;
     const [myServices, setMyServices] = useState([]);
     const [servicesLoading, setServicesLoading] = useState(true);
 

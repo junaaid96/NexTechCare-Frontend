@@ -20,7 +20,7 @@ import Link from "next/link";
 export default function EngineerProfile() {
     const router = useRouter();
     const userContext = useUser();
-    const { user, otherUserData, loading, loggedIn } = userContext;
+    const { user, userType, otherUserData, loading, loggedIn } = userContext;
     const [myApprovedServices, setMyApprovedServices] = useState([]);
     const [myPendingServices, setMyPendingServices] = useState([]);
     const [servicesLoading, setServicesLoading] = useState(true);
@@ -165,6 +165,7 @@ export default function EngineerProfile() {
                     loading={loading}
                     servicesLoading={servicesLoading}
                     onDelete={handleDeleteService}
+                    userType={userType}
                 />
                 <ServiceList
                     title="Pending Services"
@@ -172,6 +173,7 @@ export default function EngineerProfile() {
                     loading={loading}
                     servicesLoading={servicesLoading}
                     onDelete={handleDeleteService}
+                    userType={userType}
                 />
             </div>
         </div>

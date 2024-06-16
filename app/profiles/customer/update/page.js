@@ -42,6 +42,9 @@ export default function CustomerProfileUpdate() {
     const access_token = safeLocalStorage("access_token");
 
     async function handleUpdateProfile(e) {
+        // Scroll to the top of the page
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        
         e.preventDefault();
         setUpdateLoading(true);
         const form = e.target;
@@ -108,7 +111,7 @@ export default function CustomerProfileUpdate() {
                             <span>{error}</span>
                         </div>
                     )}
-                    <h1 className="text-5xl font-bold">Profile Update</h1>
+                    <h1 className="text-3xl font-bold mt-6 mb-3">Profile Update</h1>
                 </div>
                 <div className="card shrink-0 lg:w-1/2 max-sm:w-full shadow-2xl bg-base-100">
                     {user ? (

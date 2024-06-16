@@ -178,7 +178,7 @@ export default function ReviewPost({ serviceId, isTaken }) {
                         <div className="flex justify-end">
                             <button
                                 type="submit"
-                                className="px-4 py-2 btn btn-primary font-bold rounded-lg"
+                                className="px-4 py-2 btn btn-primary btn-sm font-bold rounded-lg"
                             >
                                 Submit Review
                             </button>

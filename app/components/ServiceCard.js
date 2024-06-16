@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // ServiceCard component
-export const ServiceCard = ({ service, onDelete }) => (
+export const ServiceCard = ({ service, onDelete, userType }) => (
     <div
         key={service.id}
         className="bg-white rounded-lg shadow p-6 w-96 h-72 flex flex-col justify-evenly"
@@ -25,18 +25,22 @@ export const ServiceCard = ({ service, onDelete }) => (
             >
                 View
             </Link>
-            <Link
-                className="btn btn-primary btn-outline btn-sm mt-3 w-20"
-                href={`/services/update/${service.id}`}
-            >
-                Update
-            </Link>
-            <button
-                className="btn btn-danger btn-outline btn-sm mt-3 w-20"
-                onClick={() => onDelete(service.id)}
-            >
-                Delete
-            </button>
+            {userType === "E" && (
+                <>
+                    <Link
+                        className="btn btn-primary btn-outline btn-sm mt-3 w-20"
+                        href={`/services/update/${service.id}`}
+                    >
+                        Update
+                    </Link>
+                    <button
+                        className="btn btn-danger btn-outline btn-sm mt-3 w-20"
+                        onClick={() => onDelete(service.id)}
+                    >
+                        Delete
+                    </button>
+                </>
+            )}
         </div>
     </div>
 );
@@ -48,6 +52,7 @@ export const ServiceList = ({
     loading,
     servicesLoading,
     onDelete,
+    userType,
 }) => (
     <>
         {title && (
@@ -68,6 +73,7 @@ export const ServiceList = ({
                         key={service.id}
                         service={service}
                         onDelete={onDelete}
+                        userType={userType}
                     />
                 ))}
             </div>

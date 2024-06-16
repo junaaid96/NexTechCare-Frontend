@@ -123,7 +123,7 @@ export default function UpdateService({ params }) {
                             <span>{success}</span>
                         </div>
                     )}
-                    <h1 className="text-5xl font-bold">Service Update</h1>
+                    <h2 className="text-3xl font-bold mt-6 mb-3">Service Update</h2>
                 </div>
                 <div className="card shrink-0 lg:w-1/2 max-sm:w-full shadow-2xl bg-base-100">
                     <form className="card-body" onSubmit={updateService}>
