@@ -132,7 +132,7 @@ export default function EngineerProfile() {
                             {otherUserData.address}
                         </p>
 
-                        <div className="flex items-center justify-between mt-10">
+                        <div className="flex items-center justify-between mt-10 gap-6">
                             <Link href="/services/create">
                                 <button className="btn btn-primary btn-sm w-30">
                                     Create Service

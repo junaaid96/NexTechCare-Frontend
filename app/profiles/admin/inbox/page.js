@@ -54,7 +54,7 @@ export default function AdminInbox() {
             <div className="max-w-4xl mx-auto bg-green-50 shadow-md rounded-lg overflow-hidden">
                 <div className="px-6 py-4">
                     <h2 className="text-2xl font-bold text-gray-800">Inbox</h2>
-                    <h2 className="text-gray-500 text-sm">All messages from 'contact us' section</h2>
+                    <h2 className="text-gray-500 text-sm">All messages from contact us section</h2>
                 </div>
                 {messageLoading && (<div className="flex flex-col items-center">
                                 <span className="loading loading-spinner text-primary loading-lg"></span>
