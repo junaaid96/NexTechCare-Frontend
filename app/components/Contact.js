@@ -1,11 +1,60 @@
+"use client";
+
+import { useState } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faBuilding,
     faEnvelope,
     faPhone,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCheckCircle,
+    faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Contact() {
+    const [textSubmissionLoading, setTextSubmissionLoading] = useState(false);
+    const [success, setSuccess] = useState("");
+    const [error, setError] = useState("");
+
+    async function handleSubmitText(e) {
+        e.preventDefault();
+        setTextSubmissionLoading(true);
+        const form = e.target;
+        const formData = new FormData(form);
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const subject = formData.get("subject");
+        const message = formData.get("message");
+
+        try {
+            const response = await axios.post(
+                "https://nextechcare-backend.onrender.com/contacts/create/",
+                {
+                    name,
+                    email,
+                    subject,
+                    message,
+                }
+            );
+
+            if (response.status === 201) {
+                setError("");
+                setSuccess(response.data.success);
+                setTimeout(() => {
+                    setSuccess("");
+                }, 3000);
+                setTextSubmissionLoading(false);
+            }
+        } catch (error) {
+            console.error(error);
+            setSuccess("");
+            setError("An error occurred. Please try again later.");
+            setTextSubmissionLoading(false);
+        }
+    }
+
     return (
         <section
             id="contact"
@@ -15,6 +64,22 @@ export default function Contact() {
                 <h2 className="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl mb-10">
                     Contact Us
                 </h2>
+                {error && (
+                    <div className="toast toast-end">
+                        <div role="alert" className="alert alert-error my-6">
+                            <FontAwesomeIcon icon={faTriangleExclamation} />
+                            <span>{error}</span>
+                        </div>
+                    </div>
+                )}
+                {success && (
+                    <div className="toast toast-end">
+                        <div role="alert" className="alert alert-success my-6">
+                            <FontAwesomeIcon icon={faCheckCircle} />
+                            <span>{success}</span>
+                        </div>
+                    </div>
+                )}
                 <div className="flex flex-wrap items-center justify-start gap-8 my-12 bg-green-100 rounded-xl p-6 shadow lg:w-2/3 m-auto">
                     <div className="flex items-center justify-center gap-6">
                         <FontAwesomeIcon icon={faBuilding} size="2x" />
@@ -61,7 +126,7 @@ export default function Contact() {
                         ></iframe>
                     </div>
                     <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
-                        <form className="space-y-6">
+                        <form className="space-y-6" onSubmit={handleSubmitText}>
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 <div className="form-control">
                                     <label className="label">
@@ -69,9 +134,12 @@ export default function Contact() {
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Name"
-                                        className="input input-primary"
+                                        id="name"
+                                        name="name"
+                                        placeholder="name"
+                                        className="input input-bordered input-primary"
                                         required
+                                        aria-label="name"
                                     />
                                 </div>
 
@@ -83,9 +151,12 @@ export default function Contact() {
                                     </label>
                                     <input
                                         type="email"
-                                        placeholder="Email"
-                                        className="input input-primary"
+                                        id="email"
+                                        name="email"
+                                        placeholder="email"
+                                        className="input input-bordered input-primary"
                                         required
+                                        aria-label="email"
                                     />
                                 </div>
                             </div>
@@ -96,9 +167,12 @@ export default function Contact() {
                                 </label>
                                 <input
                                     type="text"
+                                    id="subject"
+                                    name="subject"
                                     placeholder="Subject"
-                                    className="input input-primary"
+                                    className="input input-bordered input-primary"
                                     required
+                                    aria-label="subject"
                                 />
                             </div>
 
@@ -107,11 +181,20 @@ export default function Contact() {
                                     <span className="label-text">Message</span>
                                 </label>
                                 <textarea
-                                    className="textarea textarea-primary textarea-lg w-full"
+                                    id="message"
+                                    name="message"
                                     placeholder="Message"
+                                    className="textarea textarea-bordered textarea-primary textarea-lg w-full"
                                     required
                                 ></textarea>
                             </div>
+
+                            {textSubmissionLoading && (
+                                <div className="flex flex-col items-center">
+                                    <span className="loading loading-spinner text-primary loading-lg"></span>
+                                    <p className="mb-12">Please wait</p>
+                                </div>
+                            )}
 
                             <div className="form-control">
                                 <button

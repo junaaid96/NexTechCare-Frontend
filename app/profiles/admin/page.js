@@ -171,7 +171,9 @@ export default function AdminProfile() {
                         </p>
                     </div>
                     <Link href="/profiles/admin/inbox">
-                        <button className="btn btn-primary ">Inbox</button>
+                        <button className="btn btn-primary w-32 btn-sm mt-12">
+                            Inbox
+                        </button>
                     </Link>
                 </div>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">

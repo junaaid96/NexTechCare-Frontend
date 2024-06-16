@@ -94,10 +94,10 @@ export default function CreateService() {
             <div className="hero-content w-full flex-col">
                 <div className="text-center">
                     {serviceCreationLoading && (
-                        <>
+                        <div className="flex flex-col items-center">
                             <span className="loading loading-spinner text-primary loading-lg"></span>
                             <p className="mb-12">Please wait</p>
-                        </>
+                        </div>
                     )}
                     {error && (
                         <div role="alert" className="alert alert-error my-6">
