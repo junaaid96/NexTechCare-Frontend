@@ -20,13 +20,19 @@ export const ServiceCard = ({ service, onDelete }) => (
         </p>
         <div className="flex items-center justify-between gap-3">
             <Link
-                className="btn btn-primary btn-outline btn-sm mt-3 w-32"
+                className="btn btn-primary btn-outline btn-sm mt-3 w-20"
                 href={`/services/${service.id}`}
             >
                 View
             </Link>
+            <Link
+                className="btn btn-primary btn-outline btn-sm mt-3 w-20"
+                href={`/services/update/${service.id}`}
+            >
+                Update
+            </Link>
             <button
-                className="btn btn-danger btn-outline btn-sm mt-3 w-32"
+                className="btn btn-danger btn-outline btn-sm mt-3 w-20"
                 onClick={() => onDelete(service.id)}
             >
                 Delete
@@ -36,7 +42,13 @@ export const ServiceCard = ({ service, onDelete }) => (
 );
 
 // ServiceList component
-export const ServiceList = ({ title, services, loading, servicesLoading, onDelete }) => (
+export const ServiceList = ({
+    title,
+    services,
+    loading,
+    servicesLoading,
+    onDelete,
+}) => (
     <>
         {title && (
             <h4 className="text-lg font-semibold text-center mb-10 border shadow w-1/3 m-auto">
@@ -52,7 +64,11 @@ export const ServiceList = ({ title, services, loading, servicesLoading, onDelet
         ) : (
             <div className="flex flex-wrap gap-6 items-center justify-center pb-10">
                 {services.map((service) => (
-                    <ServiceCard key={service.id} service={service} onDelete={onDelete} />
+                    <ServiceCard
+                        key={service.id}
+                        service={service}
+                        onDelete={onDelete}
+                    />
                 ))}
             </div>
         )}

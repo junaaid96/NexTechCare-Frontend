@@ -82,6 +82,8 @@ export default function EngineerProfile() {
             setTimeout(() => {
                 setSuccessDeleted("");
             }, 3000);
+        } else {
+            console.error(res);
         }
     };
 

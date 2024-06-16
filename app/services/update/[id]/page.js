@@ -9,17 +9,21 @@ import {
     faCheckCircle,
     faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
+import getService from "@/lib/getService";
 
-export default function CreateService() {
+export default function UpdateService({ params }) {
+    const { id } = params;
+
     const router = useRouter();
     const userContext = useUser();
     const { loading, loggedIn, userType } = userContext;
-    const [serviceCreationLoading, setServiceCreationLoading] = useState(false);
+    const [serviceData, setServiceData] = useState({});
+    const [serviceUpdateLoading, setServiceUpdateLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
     useEffect(() => {
-        document.title = "NexTechCare - Service Creation";
+        document.title = "NexTechCare - Service Update";
         const metaDescription = document.querySelector(
             'meta[name="description"]'
         );
@@ -35,7 +39,11 @@ export default function CreateService() {
         if (loggedIn && userType !== "E") {
             router.push("/services");
         }
-    }, [loggedIn, userType, router]);
+
+        getService({ id }).then((data) => {
+            setServiceData(data);
+        });
+    }, [loggedIn, userType, router, id]);
 
     function safeLocalStorage(key) {
         if (typeof window !== "undefined") {
@@ -47,11 +55,11 @@ export default function CreateService() {
 
     const access_token = safeLocalStorage("access_token");
 
-    async function createService(e) {
+    async function updateService(e) {
         // Scroll to the top of the page
         window.scrollTo({ top: 0, behavior: "smooth" });
 
-        setServiceCreationLoading(true);
+        setServiceUpdateLoading(true);
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
@@ -60,10 +68,10 @@ export default function CreateService() {
         const price = formData.get("price");
         const duration = formData.get("duration");
 
-        setServiceCreationLoading(true);
+        setServiceUpdateLoading(true);
         try {
-            const response = await axios.post(
-                "https://nextechcare-backend.onrender.com/services/",
+            const response = await axios.put(
+                `https://nextechcare-backend.onrender.com/services/${id}/`,
                 {
                     name,
                     description,
@@ -76,16 +84,20 @@ export default function CreateService() {
                     },
                 }
             );
-            setServiceCreationLoading(false);
+            setServiceUpdateLoading(false);
             setError("");
-            setSuccess("Service created and waiting for admin approval.");
+            setSuccess("Service updated successfully.");
             setTimeout(() => {
                 setSuccess("");
             }, 3000);
         } catch (error) {
-            setServiceCreationLoading(false);
+            console.error(error);
+            setServiceUpdateLoading(false);
             setSuccess("");
-            setError("An error occurred while creating the service.");
+            setError(
+                error.response.data.error ||
+                    "An error occurred while updating the service."
+            );
         }
     }
 
@@ -93,7 +105,7 @@ export default function CreateService() {
         <div className="hero min-h-screen bg-gradient-to-b from-green-50 to-white pt-20 pb-12">
             <div className="hero-content w-full flex-col">
                 <div className="text-center">
-                    {serviceCreationLoading && (
+                    {serviceUpdateLoading && (
                         <>
                             <span className="loading loading-spinner text-primary loading-lg"></span>
                             <p className="mb-12">Please wait</p>
@@ -111,13 +123,10 @@ export default function CreateService() {
                             <span>{success}</span>
                         </div>
                     )}
-                    <h1 className="text-5xl font-bold">Create A Service</h1>
-                    <p className="py-6">
-                        Fill in the form below to create a service.
-                    </p>
+                    <h1 className="text-5xl font-bold">Service Update</h1>
                 </div>
                 <div className="card shrink-0 lg:w-1/2 max-sm:w-full shadow-2xl bg-base-100">
-                    <form className="card-body" onSubmit={createService}>
+                    <form className="card-body" onSubmit={updateService}>
                         <div className="form-control">
                             <label className="label" htmlFor="name">
                                 <span className="label-text">Name</span>
@@ -126,6 +135,7 @@ export default function CreateService() {
                                 type="text"
                                 id="name"
                                 name="name"
+                                defaultValue={serviceData.name}
                                 placeholder="name"
                                 className="input input-bordered input-primary"
                                 required
@@ -139,6 +149,7 @@ export default function CreateService() {
                             <textarea
                                 id="description"
                                 name="description"
+                                defaultValue={serviceData.description}
                                 placeholder="description"
                                 className="textarea textarea-bordered textarea-primary"
                                 required
@@ -153,6 +164,7 @@ export default function CreateService() {
                                 type="number"
                                 id="price"
                                 name="price"
+                                defaultValue={serviceData.price}
                                 placeholder="price"
                                 className="input input-bordered input-primary"
                                 required
@@ -169,6 +181,7 @@ export default function CreateService() {
                                 type="number"
                                 id="duration"
                                 name="duration"
+                                defaultValue={serviceData.duration}
                                 placeholder="duration"
                                 className="input input-bordered input-primary"
                                 required
@@ -178,7 +191,7 @@ export default function CreateService() {
                         </div>
 
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Create</button>
+                            <button className="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>

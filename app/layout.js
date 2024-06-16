@@ -77,7 +77,6 @@ export default function RootLayout({ children }) {
                     }
                 )
                 .then((response) => {
-                    console.log(response.data);
                     setUser(response.data);
                     setOtherUserData({
                         phone: response.data.phone,
