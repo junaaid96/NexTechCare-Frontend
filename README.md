@@ -5,7 +5,7 @@ Backend repo: https://github.com/junaaid96/NexTechCare-Backend
 
 ### Overview
 
-NexTechCare is an innovative support system designed to streamline service management and enhance user interactions. With robust user authentication and authorization features, NexTechCare ensures secure access to its platform, catering to three distinct user roles: Customers, Engineers, and Admins. 
+NexTechCare is an IT support system designed to streamline service management and enhance user interactions. With robust user authentication and authorization features, NexTechCare ensures secure access to its platform, catering to three distinct user roles: Customers, Engineers, and Admins. 
 
 **Functionalities:**
 
