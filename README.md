@@ -16,7 +16,7 @@ NexTechCare is an innovative support system designed to streamline service manag
 2. **User Roles and Permissions**
    - **Admin Dashboard:** Admins have the authority to approve services created by engineers, manage the customer and engineer lists, and review messages sent through the "Contact Us" section.
    - **Customer Dashboard:** Customers can avail themselves of services, leave reviews, and track their service history.
-   - **Engineer Dashboard:** Engineers can create services pending admin approval, and they have the ability to update or delete these services.
+   - **Engineer Dashboard:** Engineers can create services, and they have the ability to update or delete these services.
 
 3. **Service Management**
    - **Public Access:** Anyone can view available services, including detailed descriptions and user reviews.
