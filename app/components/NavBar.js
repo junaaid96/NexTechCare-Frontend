@@ -83,16 +83,26 @@ export default function NavBar() {
                                                             : "/profiles/admin"
                                                     }
                                                 >
-                                                    {user.user.username}{" "}
-                                                    <div className="badge badge-outline">
-                                                        {user.user.user_type ===
-                                                        "E"
-                                                            ? "Engineer"
+                                                    <div className="flex flex-wrap gap-3">
+                                                        {user.user.username
+                                                            .length > 20
+                                                            ? user.user.username.slice(
+                                                                  0,
+                                                                  17
+                                                              ) + "..."
                                                             : user.user
-                                                                  .user_type ===
-                                                              "C"
-                                                            ? "Customer"
-                                                            : "Admin"}
+                                                                  .username}{" "}
+                                                        <div className="badge badge-outline">
+                                                            {user.user
+                                                                .user_type ===
+                                                            "E"
+                                                                ? "Engineer"
+                                                                : user.user
+                                                                      .user_type ===
+                                                                  "C"
+                                                                ? "Customer"
+                                                                : "Admin"}
+                                                        </div>
                                                     </div>
                                                 </Link>
                                             )}
@@ -163,13 +173,21 @@ export default function NavBar() {
                                                 : "/profiles/admin"
                                         }
                                     >
-                                        {user.user.username}{" "}
-                                        <div className="badge badge-outline">
-                                            {user.user.user_type === "E"
-                                                ? "Engineer"
-                                                : user.user.user_type === "C"
-                                                ? "Customer"
-                                                : "Admin"}
+                                        <div className="flex flex-wrap gap-3">
+                                            {user.user.username.length > 20
+                                                ? user.user.username.slice(
+                                                      0,
+                                                      17
+                                                  ) + "..."
+                                                : user.user.username}{" "}
+                                            <div className="badge badge-outline">
+                                                {user.user.user_type === "E"
+                                                    ? "Engineer"
+                                                    : user.user.user_type ===
+                                                      "C"
+                                                    ? "Customer"
+                                                    : "Admin"}
+                                            </div>
                                         </div>
                                     </Link>
                                 )}

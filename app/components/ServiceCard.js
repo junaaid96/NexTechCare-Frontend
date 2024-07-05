@@ -16,7 +16,7 @@ export const ServiceCard = ({ service, onDelete, userType }) => (
         </p>
         <p className="text-md text-gray-600">
             <span className="font-semibold">Duration:</span> {service.duration}{" "}
-            Hrs
+            {service.duration > 1 ? "hours" : "hour"}
         </p>
         <div className="flex items-center justify-between gap-3">
             <Link
