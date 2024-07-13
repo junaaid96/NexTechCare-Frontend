@@ -52,9 +52,9 @@ export default function NavBar() {
                         <li>
                             <Link href={"/#features"}>Features</Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link href={"/#plans"}>Plans</Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link href={"/#about"}>About</Link>
                         </li>
@@ -134,9 +134,9 @@ export default function NavBar() {
                     <li>
                         <Link href={"/#features"}>Features</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link href={"/#plans"}>Plans</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link href={"/#about"}>About</Link>
                     </li>
