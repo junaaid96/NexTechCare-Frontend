@@ -10,6 +10,7 @@ import {
     faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import getReview from "@/lib/getReview";
+import Image from "next/image";
 
 export default function ReviewPost({ serviceId, isTaken }) {
     const userContext = useUser();
@@ -192,7 +193,12 @@ export default function ReviewPost({ serviceId, isTaken }) {
                         key={review.id}
                         className="bg-green-50 p-6 rounded-lg flex space-x-4 border"
                     >
-                        image
+                        <Image
+                            src="/avatar.png"
+                            alt="avatar"
+                            width={75}
+                            height={75}
+                        />
                         <div className="flex-1">
                             <div className="flex flex-wrap items-center justify-between">
                                 <div>

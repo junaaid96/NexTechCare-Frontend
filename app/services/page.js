@@ -7,7 +7,13 @@ export const metadata = {
 };
 
 export default async function Services() {
-    const services = await getAllServices();
+    let services = [];
+    try {
+        services = await getAllServices();
+    } catch (error) {
+        console.error("Failed to fetch services:", error);
+    }
+
     return (
         <div className="min-h-screen flex flex-wrap gap-8 mt-16 items-center justify-center bg-gradient-to-b from-green-50 to-white py-10 px-4">
             {services.length === 0 ? (

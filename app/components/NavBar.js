@@ -119,6 +119,7 @@ export default function NavBar() {
                         )}
                     </ul>
                 </details>
+                <Image src="/ntc_logo_2.png" alt="icon" width={40} height={40} />
                 <Link href={"/"} className="btn btn-ghost text-xl font-bold">
                     NexTechCare
                 </Link>
