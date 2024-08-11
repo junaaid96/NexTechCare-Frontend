@@ -3,6 +3,10 @@
 Live link: https://nextechcare.netlify.app/ <br>
 Backend repo: https://github.com/junaaid96/NexTechCare-Backend
 
+### Admin Credentials
+- **username:** custom_admin
+- **password:** 123456
+
 ### Overview
 
 NexTechCare is an IT support system designed to streamline service management and enhance user interactions. With robust user authentication and authorization features, NexTechCare ensures secure access to its platform, catering to three distinct user roles: Customers, Engineers, and Admins. 
