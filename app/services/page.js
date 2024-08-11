@@ -1,4 +1,5 @@
 import getAllServices from "@/lib/getAllServices";
+import { retryFetch } from "@/lib/retryFetch";
 import Link from "next/link";
 
 export const metadata = {
@@ -9,7 +10,7 @@ export const metadata = {
 export default async function Services() {
     let services = [];
     try {
-        services = await getAllServices();
+        services = await retryFetch(getAllServices);
     } catch (error) {
         console.error("Failed to fetch services:", error);
     }
