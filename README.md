@@ -3,9 +3,10 @@
 Live link: https://nextechcare.netlify.app/ <br>
 Backend repo: https://github.com/junaaid96/NexTechCare-Backend
 
-### Admin Credentials
+### Custom Admin Credentials
 - **username:** custom_admin
 - **password:** 123456
+- login: https://nextechcare.netlify.app/login
 
 ### Overview
 
