@@ -36,3 +36,23 @@ export function CodeJBorgCredit({ className }) {
         </a>
     );
 }
+
+/** Compact sidebar credit, same pattern as HealthOps Connect / Arvix dashboards:
+ *  centered muted mono line under a hairline, code icon, brand-tinted brackets. */
+export function SidebarCredit({ className }) {
+    return (
+        <a
+            href={CODEJBORG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Developed by CodeJBorg — visit developer website"
+            className={cn("flex items-center justify-center gap-1.5 border-t border-line pt-3 font-mono text-[11px] text-muted transition-colors hover:text-fg", className)}
+        >
+            <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4" /><path d="m6 8-4 4 4 4" /><path d="m14.5 4-5 16" /></svg>
+            <span>Developed by</span>
+            <span className="font-semibold text-fg">
+                <span className="text-brand">&lt;</span>CodeJBorg<span className="text-brand"> /&gt;</span>
+            </span>
+        </a>
+    );
+}
