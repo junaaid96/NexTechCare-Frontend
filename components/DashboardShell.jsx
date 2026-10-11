@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard, CalendarClock, Wrench, CheckCheck, Users, Inbox, Activity, UserCog, LogOut, Menu, X, Search, Plus,
 } from "lucide-react";
-import { Logo, CodeJBorgCredit } from "./Brand";
+import { Logo, SidebarCredit } from "./Brand";
 import ThemeToggle from "./ThemeToggle";
 import { Avatar, Skeleton } from "./ui";
 import { useAuth } from "@/lib/auth";
@@ -89,7 +89,7 @@ export default function DashboardShell({ children }) {
                         <LogOut className="size-4" />
                     </button>
                 </div>
-                <div className="flex justify-center"><CodeJBorgCredit /></div>
+                <SidebarCredit />
             </div>
         </div>
     );
