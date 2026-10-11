@@ -1,38 +1,33 @@
-# NexTechCare-Frontend
+# NexTechCare — Frontend
 
-Live link: https://nextechcare.netlify.app/ <br>
-Backend repo: https://github.com/junaaid96/NexTechCare-Backend
+Technology support marketplace: software, hardware, consultancy, data recovery, networking, cybersecurity, cloud & backup, device setup, smart home and remote support.
 
-### Custom Admin Credentials
-- **username:** custom_admin
-- **password:** 123456
-- login: https://nextechcare.netlify.app/login
+**Live:** https://nextechcare.netlify.app · **API:** https://nextechcare-backend.vercel.app · [Backend repo](https://github.com/junaaid96/NexTechCare-Backend)
 
-### Overview
+## Standout features
+1. **AI Issue Triage**: describe a problem in plain words and get the category, urgency, safe first steps and best-matched services (Groq LLM, with a rule-based fallback).
+2. **Live SLA Tracker**: every booking has a stepper (Requested → Accepted → In progress → Resolved), an SLA countdown and a timeline with engineer notes. It auto-refreshes.
+3. **Engineer Trust Score**: a transparent 0–100 score from ratings, completion rate, response speed and admin verification. It powers sorting, the admin leaderboard and the workload view.
 
-NexTechCare is an IT support system designed to streamline service management and enhance user interactions. With robust user authentication and authorization features, NexTechCare ensures secure access to its platform, catering to three distinct user roles: Customers, Engineers, and Admins. 
+Role dashboards: Customer (bookings, pending actions), Engineer (job queue, services, trust), Admin (KPIs, trends, demand by category, bulk approvals, verification, inbox, activity).
 
-**Functionalities:**
+## Stack
+Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · lucide-react · sonner. Dark and light themes, mobile-first, reduced-motion aware.
 
-1. **User Authentication and Authorization**
-   - **Registration and Profile Management:** Users can easily register, log in, and update their profiles.
-   - **Role-Based Access Control:** Different roles (Customer, Engineer, Admin) have specific permissions, ensuring secure and appropriate access to features.
+## Run locally
+```bash
+cp .env.example .env.local      # NEXT_PUBLIC_API_URL=http://localhost:8000
+npm install
+npm run dev                     # http://localhost:3000
+```
+Run the backend locally on port 8000 (see the backend README).
 
-2. **User Roles and Permissions**
-   - **Admin Dashboard:** Admins have the authority to approve services created by engineers, manage the customer and engineer lists, and review messages sent through the "Contact Us" section.
-   - **Customer Dashboard:** Customers can avail themselves of services, leave reviews, and track their service history.
-   - **Engineer Dashboard:** Engineers can create services, and they have the ability to update or delete these services.
+## Environment
+| Name | Local | Netlify |
+| --- | --- | --- |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | `https://nextechcare-backend.vercel.app` |
 
-3. **Service Management**
-   - **Public Access:** Anyone can view available services, including detailed descriptions and user reviews.
+It is inlined at build time, so redeploy after changing it. If it's unset, production builds fall back to the Vercel API URL.
 
-4. **Dashboard Management**
-   - **Personalized Dashboards:** Each user role has access to a specific dashboard tailored to their needs and permissions.
-
-5. **Contact Information**
-   - **Communication:** Users can send messages through the "Contact Us" page, ensuring effective communication and support.
-
-**Technology Used:**
-   - **Frontend:** Tailwind CSS, JS/React/Next.js
-   - **Backend:** Python/Django REST framework, JWT Authentication 
-   - **Database:** PostgreSQL
+---
+Designed & engineered by [CodeJBorg](https://junaidul.pro.bd/codejborg).
