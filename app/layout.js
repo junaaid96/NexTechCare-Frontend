@@ -1,138 +1,33 @@
-"use client";
-
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import { createContext, useState, useEffect, useContext } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-// fontawesome icon
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
+import Providers from "@/components/Providers";
 
-config.autoAddCss = false;
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", weight: ["600", "700", "800"], display: "swap" });
 
-const inter = Inter({ subsets: ["latin"] });
+export const metadata = {
+    metadataBase: new URL("https://nextechcare.netlify.app"),
+    title: { default: "NexTechCare — Technology support, triaged by AI", template: "%s · NexTechCare" },
+    description:
+        "Describe your tech problem, get instant AI triage, and book a verified engineer for software, hardware, networking, cybersecurity, data recovery and more. Live SLA tracking on every job.",
+    authors: [{ name: "CodeJBorg", url: "https://junaidul.pro.bd/codejborg" }],
+    creator: "CodeJBorg",
+    openGraph: { title: "NexTechCare", description: "Technology support marketplace with AI triage and live SLA tracking.", type: "website" },
+};
 
-const UserContext = createContext();
+export const viewport = { themeColor: "#060a13" };
+
+const themeScript = `try{var t=localStorage.getItem('ntc_theme');if(t!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}`;
 
 export default function RootLayout({ children }) {
-    const router = useRouter();
-    const [user, setUser] = useState(null);
-    const [userType, setUserType] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    const [otherUserData, setOtherUserData] = useState({
-        phone: "",
-        address: "",
-        occupation: "",
-        skills: "",
-        experience: "",
-    });
-
-    useEffect(() => {
-        document.title = "NexTechCare";
-        const metaDescription = document.querySelector(
-            'meta[name="description"]'
-        );
-        if (metaDescription) {
-            metaDescription.content =
-                "NexTechCare - A seamless IT support experience";
-        }
-
-        //removing token after 59mins
-        const storedTime = localStorage.getItem("login_time");
-        const timeLimit = 59 * 60 * 1000;
-
-        if (storedTime) {
-            const currentTime = new Date().getTime();
-            const timeDifference = currentTime - parseInt(storedTime);
-
-            if (timeDifference > timeLimit) {
-                localStorage.clear();
-                setLoggedIn(false);
-                router.push("/login");
-            }
-        }
-
-        let access_token;
-        // handling localStorage when SSR
-        if (typeof window !== "undefined") {
-            access_token = localStorage.getItem("access_token");
-            const user_type = localStorage.getItem("user_type");
-            setUserType(user_type);
-        }
-
-        if (access_token) {
-            setLoggedIn(true);
-            axios
-                .get(
-                    "https://nextechcare-backend.onrender.com/profiles/profile/",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${access_token}`,
-                        },
-                    }
-                )
-                .then((response) => {
-                    setUser(response.data);
-                    setOtherUserData({
-                        phone: response.data.phone,
-                        address: response.data.address,
-                        occupation: response.data.occupation
-                            ? response.data.occupation
-                            : null,
-                        skills: response.data.skills
-                            ? response.data.skills
-                            : null,
-                        experience: response.data.experience
-                            ? response.data.experience
-                            : null,
-                    });
-                    // setUserType(response.data.user.user_type);
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.error(error);
-                    setLoading(false);
-                });
-        }
-    }, [router, loggedIn]);
-
-    // reload to remove token after 59 mins
-    useEffect(() => {
-        setTimeout(function () {
-            window.location.reload(1);
-        }, 3540000);
-    }, [router]);
-
     return (
-        <UserContext.Provider
-            value={{
-                user,
-                setUser,
-                otherUserData,
-                setOtherUserData,
-                userType,
-                setUserType,
-                loading,
-                loggedIn,
-                setLoggedIn,
-            }}
-        >
-            <html lang="en" data-theme="emerald">
-                <body className={inter.className}>
-                    <NavBar />
-                    {children}
-                    <Footer />
-                </body>
-            </html>
-        </UserContext.Provider>
+        <html lang="en" className={`${inter.variable} ${jakarta.variable}`} suppressHydrationWarning>
+            <head>
+                <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+            </head>
+            <body className="min-h-dvh font-sans">
+                <Providers>{children}</Providers>
+            </body>
+        </html>
     );
-}
-
-export function useUser() {
-    return useContext(UserContext);
 }

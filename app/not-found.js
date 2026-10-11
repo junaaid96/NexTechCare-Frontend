@@ -1,16 +1,14 @@
+import { Button } from "@/components/ui";
+import { LogoMark } from "@/components/Brand";
+
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex flex-col justify-center items-center">
-            <div className="max-w-lg bg-white shadow-md rounded-md p-8">
-                <h1 className="text-3xl font-bold text-red-600 mb-4">
-                    404 - Page Not Found!
-                </h1>
-                <p className="text-gray-800">
-                    Sorry, the page you are looking for could not be found.
-                </p>
-                <p className="text-gray-800">
-                    Please check the URL or go back to the homepage.
-                </p>
+        <div className="grid min-h-dvh place-items-center px-6 text-center">
+            <div>
+                <LogoMark className="mx-auto size-12" />
+                <p className="mt-6 font-display text-6xl font-extrabold text-gradient">404</p>
+                <p className="mt-2 text-muted">This page went offline. Let&apos;s get you back.</p>
+                <Button href="/" className="mt-6">Back to home</Button>
             </div>
         </div>
     );

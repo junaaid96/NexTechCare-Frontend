@@ -1,26 +1,86 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-html {
-    scroll-behavior: smooth;
-  }
+@custom-variant dark (&:where(.dark, .dark *));
 
-.bg-banner {
-    position: relative;
-    overflow: hidden;
+@theme {
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    --color-bg: var(--bg);
+    --color-surface: var(--surface);
+    --color-surface-2: var(--surface-2);
+    --color-line: var(--line);
+    --color-fg: var(--fg);
+    --color-muted: var(--muted);
+    --color-brand: var(--brand);
+    --color-brand-2: var(--brand-2);
+    --color-borg: #5ad6a0;
+    --animate-fade-up: fade-up 0.5s ease-out both;
+    --animate-pulse-ring: pulse-ring 1.8s ease-out infinite;
 }
 
-.bg-banner::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: url("/banner.png");
-    background-size: cover;
-    background-position: center;
-    filter: blur(4px);
-    z-index: -1;
+:root {
+    --bg: #f6f8fc;
+    --surface: #ffffff;
+    --surface-2: #eef2f8;
+    --line: #e2e8f0;
+    --fg: #0b1220;
+    --muted: #5b6577;
+    --brand: #2563eb;
+    --brand-2: #06b6d4;
+    color-scheme: light;
+}
+
+.dark {
+    --bg: #060a13;
+    --surface: #0c1220;
+    --surface-2: #121a2b;
+    --line: #1c2638;
+    --fg: #e8edf6;
+    --muted: #8b97ab;
+    --brand: #4f8cff;
+    --brand-2: #22d3ee;
+    color-scheme: dark;
+}
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+@keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand) 55%, transparent); }
+    100% { box-shadow: 0 0 0 12px transparent; }
+}
+
+html { scroll-behavior: smooth; }
+body {
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+}
+::selection { background: color-mix(in oklab, var(--brand) 35%, transparent); }
+
+.text-gradient {
+    background: linear-gradient(100deg, var(--brand), var(--brand-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.bg-grid {
+    background-image:
+        linear-gradient(to right, color-mix(in oklab, var(--line) 70%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in oklab, var(--line) 70%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+.glow {
+    background: radial-gradient(600px 300px at 50% -10%, color-mix(in oklab, var(--brand) 28%, transparent), transparent 70%),
+        radial-gradient(500px 260px at 85% 10%, color-mix(in oklab, var(--brand-2) 18%, transparent), transparent 70%);
+}
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
 }
