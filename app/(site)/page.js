@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Gauge, MessageSquareText, Radar, ShieldCheck, Sparkles, Timer, Wrench } from "lucide-react";
+import { ArrowRight, BadgeCheck, Gauge, MessageSquareText, Radar, ShieldCheck, Sparkles, Timer, Wrench, FlaskConical } from "lucide-react";
 import Triage from "@/components/Triage";
 import Contact from "@/components/Contact";
 import FeaturedServices from "@/components/FeaturedServices";
@@ -48,6 +48,10 @@ export default function Home() {
                     <p className="mx-auto mt-5 max-w-2xl text-base text-muted sm:text-lg">
                         NexTechCare is the support marketplace for software, hardware, networking, cybersecurity, data recovery and more. Start by telling us what&apos;s wrong.
                     </p>
+                    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                        <Button href="/login#demo" variant="outline" size="sm"><FlaskConical className="size-4" /> Explore demo</Button>
+                        <span className="text-xs text-muted">One-click customer, engineer &amp; admin accounts</span>
+                    </div>
                     <div id="triage" className="mx-auto mt-10 max-w-3xl scroll-mt-24 text-left">
                         <Triage />
                     </div>

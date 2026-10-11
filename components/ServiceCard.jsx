@@ -19,6 +19,7 @@ export default function ServiceCard({ service, highlight }) {
                 <span className={`grid size-10 place-items-center rounded-xl bg-surface-2 ${cat.hue.split(" ").pop()}`}>
                     <Icon className="size-5" />
                 </span>
+                {service.is_demo && !highlight && <span className="rounded-full border border-dashed border-line px-2 py-0.5 text-[11px] font-medium text-muted">Demo</span>}
                 {highlight && <span className="rounded-full bg-brand px-2 py-0.5 text-[11px] font-semibold text-white">Best match</span>}
             </div>
             <p className="relative mt-4 text-xs font-medium uppercase tracking-wider text-muted">{cat.label}</p>

@@ -116,8 +116,20 @@ export default function DashboardShell({ children }) {
                         <ThemeToggle />
                     </div>
                 </header>
-                <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8">{!ready || !role ? <Skeleton className="h-64" /> : children}</main>
+                <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8"><DemoBanner />{!ready || !role ? <Skeleton className="h-64" /> : children}</main>
             </div>
+        </div>
+    );
+}
+
+function DemoBanner() {
+    const [demo, setDemo] = useState(false);
+    useEffect(() => setDemo(localStorage.getItem("ntc_demo") === "1"), []);
+    if (!demo) return null;
+    return (
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-dashed border-brand/40 bg-brand/5 px-4 py-2.5 text-sm">
+            <span><b className="text-brand">Demo mode</b> <span className="text-muted">· explore freely; profile edits and deletions are disabled and data resets nightly.</span></span>
+            <a href="/register" className="font-medium text-brand hover:underline">Create a real account</a>
         </div>
     );
 }

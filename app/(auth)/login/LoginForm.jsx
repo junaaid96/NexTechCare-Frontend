@@ -7,6 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import AuthShell from "@/components/AuthShell";
 import { Button, Input } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
+import DemoLogin from "@/components/DemoLogin";
 
 export default function LoginForm() {
     const { login } = useAuth();
@@ -45,6 +46,7 @@ export default function LoginForm() {
                 {error && <p className="rounded-xl bg-rose-500/10 px-3 py-2 text-sm text-rose-500" role="alert">{error}</p>}
                 <Button type="submit" loading={loading} size="lg" className="w-full">Log in</Button>
             </form>
+            <DemoLogin next={next} />
             <p className="mt-6 text-center text-sm text-muted">
                 New to NexTechCare? <Link href="/register" className="font-medium text-brand hover:underline">Create an account</Link>
             </p>
