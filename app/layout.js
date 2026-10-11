@@ -12,7 +12,7 @@ export const metadata = {
         "Describe your tech problem, get instant AI triage, and book a verified engineer for software, hardware, networking, cybersecurity, data recovery and more. Live SLA tracking on every job.",
     authors: [{ name: "CodeJBorg", url: "https://junaidul.pro.bd/codejborg" }],
     creator: "CodeJBorg",
-    openGraph: { title: "NexTechCare", description: "Technology support marketplace with AI triage and live SLA tracking.", type: "website" },
+    openGraph: { title: "NexTechCare", siteName: "NexTechCare", description: "Technology support marketplace with AI triage and live SLA tracking.", type: "website" },
 };
 
 export const viewport = { themeColor: "#060a13" };

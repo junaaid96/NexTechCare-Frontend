@@ -3,30 +3,10 @@ import { cn } from "@/lib/utils";
 
 export const CODEJBORG_URL = "https://junaidul.pro.bd/codejborg";
 
-export function LogoMark({ className }) {
-    return (
-        <svg viewBox="0 0 32 32" className={cn("size-8", className)} aria-hidden>
-            <defs>
-                <linearGradient id="ntc-g" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="var(--brand)" />
-                    <stop offset="1" stopColor="var(--brand-2)" />
-                </linearGradient>
-            </defs>
-            <rect width="32" height="32" rx="9" fill="url(#ntc-g)" />
-            <path d="M10 22V10l12 12V10" stroke="#fff" strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            <circle cx="22" cy="10" r="2.2" fill="#fff" />
-            <circle cx="10" cy="22" r="2.2" fill="#fff" />
-        </svg>
-    );
-}
-
 export function Logo({ className }) {
     return (
-        <Link href="/" className={cn("flex items-center gap-2.5 font-display text-lg font-bold tracking-tight", className)} aria-label="NexTechCare home">
-            <LogoMark />
-            <span>
-                NexTech<span className="text-gradient">Care</span>
-            </span>
+        <Link href="/" className={cn("font-display text-xl font-extrabold tracking-tight", className)} aria-label="NexTechCare home">
+            NexTech<span className="text-gradient">Care</span>
         </Link>
     );
 }
