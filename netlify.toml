@@ -8,3 +8,6 @@
 
 # NEXT_PUBLIC_API_URL is set in Netlify > Site configuration > Environment variables
 # (e.g. https://nextechcare-backend.vercel.app). It is inlined at build time.
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
