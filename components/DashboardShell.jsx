@@ -89,7 +89,7 @@ export default function DashboardShell({ children }) {
                         <LogOut className="size-4" />
                     </button>
                 </div>
-                <CodeJBorgCredit variant="sidebar" />
+                <div className="flex justify-center"><CodeJBorgCredit /></div>
             </div>
         </div>
     );

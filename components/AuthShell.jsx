@@ -27,7 +27,7 @@ export default function AuthShell({ title, subtitle, children }) {
                             ))}
                         </ul>
                     </div>
-                    <CodeJBorgCredit />
+                    <span />
                 </div>
             </div>
             <div className="flex flex-col">
@@ -42,7 +42,7 @@ export default function AuthShell({ title, subtitle, children }) {
                         <div className="mt-8">{children}</div>
                     </div>
                 </div>
-                <div className="flex justify-center pb-6 lg:hidden">
+                <div className="flex justify-center pb-6">
                     <CodeJBorgCredit />
                 </div>
             </div>

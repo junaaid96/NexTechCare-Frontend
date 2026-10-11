@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export const CODEJBORG_URL = "https://junaidul.pro.bd/codejborg";
@@ -32,40 +31,28 @@ export function Logo({ className }) {
     );
 }
 
-/** CodeJBorg credit. variant: "footer" | "sidebar" | "inline" */
-export function CodeJBorgCredit({ variant = "inline", className }) {
-    if (variant === "sidebar")
-        return (
-            <a
-                href={CODEJBORG_URL}
-                target="_blank"
-                rel="noopener"
-                className={cn(
-                    "group flex items-center gap-2.5 rounded-xl border border-borg/20 bg-borg/5 p-2.5 transition hover:border-borg/40 hover:bg-borg/10",
-                    className
-                )}
-            >
-                <Image src="/codejborg-mark.png" alt="" width={28} height={28} className="rounded-md" />
-                <span className="leading-tight">
-                    <span className="block text-[10px] uppercase tracking-wider text-muted">Crafted by</span>
-                    <span className="block text-sm font-semibold">
-                        Code<span className="text-borg">J</span>Borg
-                    </span>
-                </span>
-            </a>
-        );
+/** CodeJBorg credit, same pattern as other CodeJBorg projects: "Developed by <CodeJBorg />". */
+export function CodeJBorgCredit({ className }) {
     return (
         <a
             href={CODEJBORG_URL}
             target="_blank"
-            rel="noopener"
-            className={cn("inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-fg", className)}
+            rel="noopener noreferrer"
+            aria-label="Developed by CodeJBorg — visit developer website"
+            className={cn(
+                "group inline-flex shrink-0 items-center gap-2 rounded-full border border-line bg-surface/60 py-1.5 pr-3 pl-1.5 font-mono text-[11px] tracking-wide text-muted transition-colors duration-300 hover:border-muted hover:bg-surface hover:text-fg",
+                className
+            )}
         >
-            <span>{variant === "footer" ? "Designed & engineered by" : "Crafted by"}</span>
-            <Image src="/codejborg-mark.png" alt="" width={18} height={18} className="rounded" />
-            <span className="font-semibold text-fg">
-                Code<span className="text-borg">J</span>Borg
+            <span className="flex size-6 items-center justify-center rounded-full bg-brand text-white">
+                <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4" /><path d="m6 8-4 4 4 4" /><path d="m14.5 4-5 16" /></svg>
             </span>
+            <span>Developed by</span>
+            <span className="font-semibold text-fg">
+                <span className="text-brand">&lt;</span>CodeJBorg<span className="text-brand"> /&gt;</span>
+            </span>
+            <span aria-hidden="true" className="inline-block h-3.5 w-[2px] bg-brand motion-safe:animate-pulse" />
+            <svg className="size-3.5 opacity-40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
         </a>
     );
 }
