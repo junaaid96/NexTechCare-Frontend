@@ -12,7 +12,7 @@ Technology support marketplace: software, hardware, consultancy, data recovery, 
 Role dashboards: Customer (bookings, pending actions), Engineer (job queue, services, trust), Admin (KPIs, trends, demand by category, bulk approvals, verification, inbox, activity).
 
 ## Stack
-Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · lucide-react · sonner. Dark and light themes, mobile-first, reduced-motion aware.
+Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · lucide-react · sonner. Mobile-first, reduced-motion aware.
 
 ## Run locally
 ```bash
